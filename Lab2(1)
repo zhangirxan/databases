@@ -1,0 +1,51 @@
+
+ALTER TABLE Security_check ADD CONSTRAINT fk_security_check_passenger_id
+    FOREIGN KEY (passenger_id) REFERENCES Passengers (passenger_id);
+
+ALTER TABLE Booking ADD CONSTRAINT fk_booking_passenger_id
+FOREIGN KEY (passenger_id)REFERENCES Passengers (passenger_id);
+
+ALTER TABLE Baggage_check ADD CONSTRAINT fk_baggage_check_passenger_id
+FOREIGN KEY (passenger_id) REFERENCES Passengers (passenger_id);
+
+
+ALTER TABLE Baggage_check ADD CONSTRAINT fk_baggage_check_booking_id
+FOREIGN KEY (booking_id) REFERENCES Booking (booking_id);
+
+ALTER TABLE Baggage ADD CONSTRAINT fk_baggage_booking_id
+FOREIGN KEY (booking_id) REFERENCES Booking (booking_id);
+
+ALTER TABLE Boarding_pass ADD CONSTRAINT fk_boarding_pass_booking_id
+FOREIGN KEY (booking_id) REFERENCES Booking (booking_id);
+
+ALTER TABLE Booking_flight ADD CONSTRAINT fk_booking_flight_booking_id
+FOREIGN KEY (booking_id) REFERENCES Booking (booking_id);
+
+ALTER TABLE Booking_flight ADD CONSTRAINT fk_booking_flight_flight_id
+FOREIGN KEY (flight_id) REFERENCES Flights (flight_id);
+
+
+ALTER TABLE Flights ADD CONSTRAINT fk_flights_departing_airport_id
+FOREIGN KEY (departing_airport_id) REFERENCES Airport (airport_id);
+
+ALTER TABLE Flights ADD CONSTRAINT fk_flights_arriving_airport_id
+FOREIGN KEY (arriving_airport_id) REFERENCES Airport (airport_id);
+
+
+ALTER TABLE Flights
+ADD CONSTRAINT fk_flights_airline_id
+FOREIGN KEY (airline_id)
+REFERENCES Airline (airline_id);
+
+
+DELETE FROM flights
+WHERE EXTRACT(YEAR FROM sch_arrival_time) = 2024;
+
+
+insert into flights (flight_id, sch_departure_time, sch_arrival_time, departing_airport_id, arriving_airport_id, departing_gate, arriving_gate, airline_id, act_departure_time, act_arrival_time, created_at, updated_at) values (3, '2024-06-26', '2021-11-12', 3, 35, 5, 1, 4,'2021-09-26', '2023-03-07', '1937-02-01', '1960-03-20');
+insert into flights (flight_id, sch_departure_time, sch_arrival_time, departing_airport_id, arriving_airport_id, departing_gate, arriving_gate, airline_id, act_departure_time, act_arrival_time, created_at, updated_at) values (4, '2022-05-02', '2023-04-16', 99, 73, 4, 1, 1,'2022-06-19', '2023-07-23', '1945-09-17', '1920-07-27');
+insert into flights (flight_id, sch_departure_time, sch_arrival_time, departing_airport_id, arriving_airport_id, departing_gate, arriving_gate, airline_id, act_departure_time, act_arrival_time, created_at, updated_at) values (5, '2024-05-01', '2022-04-24', 27, 45, 1, 5, 1,'2024-06-19', '2023-06-29', '1959-08-26', '1996-03-10');
+
+
+UPDATE booking
+SET ticket_price = ticket_price * 1.10;
